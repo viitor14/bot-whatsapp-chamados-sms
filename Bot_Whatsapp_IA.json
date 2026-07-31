@@ -16,7 +16,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://host.docker.internal:3000/webhook/bot/verificar",
+        "url": "http://host.docker.internal:4000/webhook/bot/verificar",
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
@@ -73,7 +73,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://host.docker.internal:3000/webhook/bot/chamado",
+        "url": "http://host.docker.internal:4000/webhook/bot/chamado",
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
