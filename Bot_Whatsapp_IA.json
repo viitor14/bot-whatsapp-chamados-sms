@@ -1,0 +1,147 @@
+{
+  "name": "Bot_Whatsapp_IA",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-webhook",
+        "options": {}
+      },
+      "id": "e2f1b4c3-1c73-4f93-b682-123456789abc",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [ 200, 300 ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:3000/webhook/bot/verificar",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "telefone",
+              "value": "={{ $json.body.data.key.remoteJid.replace('@s.whatsapp.net', '') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b3c4d5e6-1234-5678-abcd-123456789abc",
+      "name": "Verifica Requisitante",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [ 400, 300 ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.existe }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "c4d5e6f7-1234-5678-abcd-123456789abc",
+      "name": "Usuário Existe?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [ 600, 300 ]
+    },
+    {
+      "parameters": {
+        "model": "gemini-pro",
+        "messages": {
+          "messageValues": [
+            {
+              "role": "user",
+              "message": "={{ $('Webhook').item.json.body.data.message.conversation }}"
+            }
+          ]
+        },
+        "systemMessage": "Você é um assistente de TI. Extraia o problema do usuário. Responda apenas com a descrição resumida do problema, sem formatação extra."
+      },
+      "id": "d5e6f7a8-1234-5678-abcd-123456789abc",
+      "name": "Google Gemini",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [ 800, 200 ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:3000/webhook/bot/chamado",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "telefone",
+              "value": "={{ $('Webhook').item.json.body.data.key.remoteJid.replace('@s.whatsapp.net', '') }}"
+            },
+            {
+              "name": "problema",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        }
+      },
+      "id": "e6f7a8b9-1234-5678-abcd-123456789abc",
+      "name": "Cria Chamado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [ 1000, 200 ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Verifica Requisitante",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica Requisitante": {
+      "main": [
+        [
+          {
+            "node": "Usuário Existe?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Usuário Existe?": {
+      "main": [
+        [
+          {
+            "node": "Google Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Google Gemini": {
+      "main": [
+        [
+          {
+            "node": "Cria Chamado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "pinData": {}
+}

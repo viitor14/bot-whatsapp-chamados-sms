@@ -1,0 +1,68 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    restart: always
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+  evolution-api:
+    image: atendesmart/evolution-api:v2.1.1
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVER_URL=http://localhost:8080
+      - DOCKER_ENV=true
+      - LOG_LEVEL=ERROR,WARN,DEBUG,INFO,LOG,VERBOSE,DARK,WEBHOOKS
+      - LOG_COLOR=true
+      - LOG_BAILEYS=error
+      - AUTHENTICATION_TYPE=apikey
+      - AUTHENTICATION_API_KEY=vitor123
+      - REDIS_URI=redis://redis:6379
+      - REDIS_PREFIX_KEY=evolution
+      - REDIS_DB=0
+      - REDIS_GLOBAL=true
+      - WEBHOOK_GLOBAL_ENABLED=false
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://postgres:postgres@postgres:5432/evolution
+      - DATABASE_CONNECTION_CLIENT_NAME=evolution_api
+    depends_on:
+      - redis
+      - postgres
+    volumes:
+      - evolution_instances:/evolution/instances
+
+  redis:
+    image: redis:alpine
+    restart: always
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=evolution
+      - TZ=America/Sao_Paulo
+    ports:
+      - "5433:5432" # 5433 no host para nao dar conflito se o usuario ja tiver postgres rodando
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  n8n_data:
+  evolution_instances:
+  redis_data:
+  postgres_data:
