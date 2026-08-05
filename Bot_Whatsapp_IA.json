@@ -1,5 +1,5 @@
 {
-  "name": "Bot_Whatsapp_IA",
+  "name": "Bot_Whatsapp_IA_RAG_Agent",
   "nodes": [
     {
       "parameters": {
@@ -7,11 +7,15 @@
         "path": "whatsapp-webhook",
         "options": {}
       },
-      "id": "e2f1b4c3-1c73-4f93-b682-123456789abc",
-      "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [ 200, 300 ]
+      "typeVersion": 2,
+      "position": [
+        140,
+        300
+      ],
+      "id": "e2f1b4c3-1c73-4f93-b682-123456789abc",
+      "name": "Webhook WhatsApp",
+      "webhookId": "whatsapp-webhook"
     },
     {
       "parameters": {
@@ -22,53 +26,126 @@
           "parameters": [
             {
               "name": "telefone",
-              "value": "={{ $json.body.data.key.remoteJid.replace('@s.whatsapp.net', '') }}"
+              "value": "={{ $json.body?.data?.key?.remoteJid?.replace('@s.whatsapp.net', '') || $json.body?.phone || '' }}"
             }
           ]
         },
         "options": {}
       },
-      "id": "b3c4d5e6-1234-5678-abcd-123456789abc",
-      "name": "Verifica Requisitante",
       "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
-      "position": [ 400, 300 ]
+      "typeVersion": 4.2,
+      "position": [
+        360,
+        300
+      ],
+      "id": "b3c4d5e6-1234-5678-abcd-123456789abc",
+      "name": "Verifica Requisitante"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Motor RAG: Busca de Conhecimento e Diagnóstico Técnico Especializado\nconst rawMsg = $('Webhook WhatsApp').first()?.json?.body?.data?.message?.conversation || $('Webhook WhatsApp').first()?.json?.body?.data?.message?.extendedTextMessage?.text || $('Webhook WhatsApp').first()?.json?.body?.message || '';\nconst userMessage = String(rawMsg).toLowerCase();\nconst remoteJid = $('Webhook WhatsApp').first()?.json?.body?.data?.key?.remoteJid || '';\nconst telefone = remoteJid.replace('@s.whatsapp.net', '') || $('Webhook WhatsApp').first()?.json?.body?.phone || '';\nconst instanceName = $('Webhook WhatsApp').first()?.json?.body?.instance || 'suporte-chamados';\nconst reqData = $('Verifica Requisitante').first()?.json || { existe: false };\n\n// Catálogo RAG Híbrido de Diagnóstico da SMS\nconst knowledgeBase = [\n  {\n    id: \"KB-SYS-CRITICAL\",\n    categoria: \"Sistemas e Softwares\",\n    equipamentos: [\"Computador\", \"Windows\", \"CPU\", \"Gabinete\", \"Memória RAM\", \"SSD\", \"HD\"],\n    tags: [\n      \"tela azul\", \"blue screen\", \"bsod\", \"critical_process_died\",\n      \"kernel_data_inpage_error\", \"whea_uncorrectable_error\", \"page_fault_in_nonpaged_area\",\n      \"desliga sozinho\", \"reiniciando sozinho\", \"reiniciando em loop\", \"desligando do nada\",\n      \"travamento total\", \"travou tudo\", \"beep continuo\"\n    ],\n    sintoma: \"Código de erro grave de sistema (ex: ffx..., 0x...), Tela Azul (BSOD) ou falha física de hardware\",\n    solucao_nivel_1: \"ERRO CRÍTICO IDENTIFICADO: Falha no sistema/hardware que requer visita presencial da equipe técnica. Abertura de chamado direto.\",\n    tipo: \"abertura_direta\",\n    requer_visita: true,\n    urgencia_recomendada: \"alta\"\n  },\n  {\n    id: \"KB-SYS-NIVEL1\",\n    categoria: \"Sistemas e Softwares\",\n    equipamentos: [\"Computador\", \"Windows\", \"Sistema\", \"Software\"],\n    tags: [\n      \"0x80070005\", \"acesso negado\", \"permissao\", \"bloqueado\", \"arquivo em uso\",\n      \"0x0000011b\", \"fila travada\", \"spooler\", \"travando aplicativo\", \"libreoffice\", \"word\", \"excel\"\n    ],\n    sintoma: \"Erro de permissão de software, bloqueio temporário ou fila de impressão travada\",\n    solucao_nivel_1: \"1. *Executar como Administrador:* feche o aplicativo, clique com o botão direito no ícone e escolha 'Executar como administrador'.\\n2. *Gerenciador de Tarefas:* pressione Ctrl + Shift + Esc e finalize a tarefa travada.\\n3. *Reiniciar:* reinicie o computador para limpar arquivos temporários.\",\n    tipo: \"orientar_nivel_1\",\n    requer_visita: false,\n    urgencia_recomendada: \"media\"\n  },\n  {\n    id: \"KB-SIS-ESUS\",\n    categoria: \"Sistemas de Saúde\",\n    equipamentos: [\"PEC e-SUS\", \"Prontuário Eletrônico\", \"BPA\", \"SISREG\", \"Sistema de Saúde\"],\n    tags: [\n      \"esus\", \"pec\", \"tela branca\", \"502\", \"504\", \"err_connection\", \"fora do ar\",\n      \"servidor esus\", \"sistema travou\", \"prontuario fora\", \"sisreg\", \"bpa\"\n    ],\n    sintoma: \"Sistema e-SUS / PEC ou prontuário com erro de conexão ou tela branca\",\n    solucao_nivel_1: \"1. *Limpar Cache:* no navegador, pressione Ctrl + Shift + R para forçar a atualização completa.\\n2. *Janela Anônima:* tente acessar em uma aba anônima (Ctrl + Shift + N).\\n3. *Reiniciar Navegador:* feche todas as abas do navegador e abra novamente o link do e-SUS.\",\n    tipo: \"orientar_nivel_1\",\n    requer_visita: false,\n    urgencia_recomendada: \"alta\"\n  },\n  {\n    id: \"KB-SIS-TOKEN\",\n    categoria: \"Sistemas de Saúde\",\n    equipamentos: [\"Certificado Digital\", \"Token A3\", \"Cartão SUS\", \"Leitora de Cartão\"],\n    tags: [\"token\", \"certificado\", \"leitora\", \"pin\", \"assinatura digital\", \"a3\", \"safesign\", \"cartao sus\"],\n    sintoma: \"Certificado Digital A3 ou Token não reconhecido para assinatura médica/enfermagem\",\n    solucao_nivel_1: \"1. *Troque de porta USB:* conecte o Token em uma porta USB traseira direta da CPU.\\n2. *Verifique o software:* confira se o ícone do SafeSign/Token na barra do Windows está verde.\\n3. *Reinicie o navegador:* feche todas as janelas do navegador e tente assinar novamente.\",\n    tipo: \"orientar_nivel_1\",\n    requer_visita: false,\n    urgencia_recomendada: \"media\"\n  },\n  {\n    id: \"KB-IMP-ETIQUETA\",\n    categoria: \"Impressoras\",\n    equipamentos: [\"Zebra ZD220\", \"Zebra GC420t\", \"Elgin L42 Pro\", \"Impressora de Etiqueta\", \"Etiqueta\", \"Zebra\", \"Elgin\"],\n    tags: [\"etiqueta\", \"luz vermelha\", \"travada\", \"calibracao\", \"sensor\", \"termica\", \"rolo\", \"piscando\", \"vermelho\", \"ribbon\"],\n    sintoma: \"Impressora térmica piscando luz vermelha ou descalibrada\",\n    solucao_nivel_1: \"1. *Desligue a impressora:* no botão liga/desliga traseiro.\\n2. *Ajuste os guias:* abra a tampa e certifique-se de que as guias amarelas estão ajustadas na largura da etiqueta sem apertar.\\n3. *Feche a tampa:* pressione com as duas mãos até ouvir os 2 cliques laterais.\\n4. *Calibre o sensor:* ligue segurando o botão Feed até piscar e solte para puxar as etiquetas.\\n5. *Reinicie o spooler:* se não imprimir no Windows, reinicie o spooler de impressão.\",\n    tipo: \"orientar_nivel_1\",\n    requer_visita: false,\n    urgencia_recomendada: \"media\"\n  },\n  {\n    id: \"KB-IMP-LASER\",\n    categoria: \"Impressoras\",\n    equipamentos: [\"Lexmark\", \"Brother\", \"HP LaserJet\", \"Ricoh\", \"Impressora Laser\", \"Impressora A4\", \"Toner\"],\n    tags: [\"papel preso\", \"papel atolado\", \"spooler\", \"nao imprime\", \"laser\", \"fila de impressao\", \"toner\", \"mancha\"],\n    sintoma: \"Impressora laser travada / Papel preso / Erro no spooler de impressão\",\n    solucao_nivel_1: \"1. *Retire o papel preso:* abra a porta frontal com cuidado e puxe a folha no sentido de saída sem rasgar.\\n2. *Verifique a bandeja:* garanta que as folhas não estejam úmidas ou amassadas na bandeja.\\n3. *Reinicie o Spooler:* abra 'Serviços' no Windows, localize 'Spooler de Impressão' e clique em *Reiniciar*.\",\n    tipo: \"orientar_nivel_1\",\n    requer_visita: false,\n    urgencia_recomendada: \"media\"\n  },\n  {\n    id: \"KB-RED-CABO\",\n    categoria: \"Rede e Conectividade\",\n    equipamentos: [\"Cabo de Rede\", \"Switch\", \"Roteador\", \"Internet\"],\n    tags: [\"sem internet\", \"cabo de rede\", \"desconectado\", \"rede fora\", \"caiu internet\", \"sem conexao\", \"dns\"],\n    sintoma: \"Cabo de rede desconectado ou computador sem sinal de internet/rede local\",\n    solucao_nivel_1: \"1. *Verifique o cabo de rede:* confira atrás do computador se os LEDs do conector de rede estão acesos ou piscando.\\n2. *Reconecte o cabo:* desconecte o plugue RJ45, aguarde 5 segundos e reconecte até ouvir o clique.\\n3. *Teste em outros PCs:* verifique se outros computadores da sala também estão sem rede.\",\n    tipo: \"orientar_nivel_1\",\n    requer_visita: false,\n    urgencia_recomendada: \"alta\"\n  },\n  {\n    id: \"KB-HRD-LEITOR\",\n    categoria: \"Hardware e Periféricos\",\n    equipamentos: [\"Leitor de Código de Barras\", \"Leitor Óptico\", \"Scanner\"],\n    tags: [\"leitor\", \"codigo de barras\", \"bip\", \"scanner\", \"receita\", \"medicamento\", \"farmacia\"],\n    sintoma: \"Leitor de código de barras não emite feixe de luz ou não lê códigos\",\n    solucao_nivel_1: \"1. *Conexão USB:* conecte em uma porta USB traseira direta da CPU.\\n2. *Reset de Fábrica:* escaneie o código de barras 'Factory Reset / Restore Default' no manual rápido.\",\n    tipo: \"orientar_nivel_1\",\n    requer_visita: false,\n    urgencia_recomendada: \"baixa\"\n  },\n  {\n    id: \"KB-HRD-ENERGIA\",\n    categoria: \"Hardware e Periféricos\",\n    equipamentos: [\"Monitor\", \"Nobreak\", \"Fonte\", \"Estabilizador\", \"Filtro de Linha\"],\n    tags: [\"nao liga\", \"tela preta\", \"sem sinal\", \"fonte queimou\", \"cheiro de queimado\", \"estalo\", \"nobreak apitando\"],\n    sintoma: \"Equipamento não liga, sem sinal no monitor ou nobreak apitando\",\n    solucao_nivel_1: \"1. *Alimentação:* verifique se o botão do Nobreak/Filtro de linha está ligado e com luz verde.\\n2. *Cabo de vídeo:* confira se o cabo HDMI/VGA está bem parafusado atrás do monitor e da CPU.\\n3. *Drenar energia estática:* desligue da tomada, segure o botão power da CPU por 15 segundos e religue.\",\n    tipo: \"orientar_nivel_1\",\n    requer_visita: true,\n    urgencia_recomendada: \"alta\"\n  }\n];\n\n// Detecção de código de erro alfanumérico ou BSOD (ex: ffx0001, 0x80070005, tela azul)\nconst isErrorCode = /\\b(ffx[a-z0-9]+|0x[a-f0-9]+|(?=[a-z]*[0-9])(?=[0-9]*[a-z])[a-z0-9]{6,16}|tela\\s*azul|bsod|blue\\s*screen)\\b/i.test(userMessage);\n\nlet hasAnyTagMatchedAcrossKB = false;\nfor (const item of knowledgeBase) {\n  for (const tag of item.tags) {\n    if (userMessage.includes(tag)) {\n      hasAnyTagMatchedAcrossKB = true;\n      break;\n    }\n  }\n}\n\nlet matched = [];\nfor (const item of knowledgeBase) {\n  let score = 0;\n  let hasSymptomTag = false;\n\n  for (const tag of item.tags) {\n    if (userMessage.includes(tag)) {\n      score += 6;\n      hasSymptomTag = true;\n    }\n  }\n  for (const eq of item.equipamentos) {\n    if (userMessage.includes(eq.toLowerCase())) {\n      score += 1;\n    }\n  }\n  \n  // Se for código de erro ou BSOD e NÃO houver nenhum procedimento específico cadastrado na KB\n  if (isErrorCode && item.id === \"KB-SYS-CRITICAL\" && !hasAnyTagMatchedAcrossKB) {\n    score += 15;\n    hasSymptomTag = true;\n  }\n\n  // Só consideramos match válido no RAG se houver ao menos um sintoma/tag específico correspondente\n  if (score >= 6 && hasSymptomTag) {\n    matched.push({ score, ...item });\n  }\n}\n\nmatched.sort((a, b) => b.score - a.score);\nconst topMatch = matched[0] || null;\n\nreturn [{\n  json: {\n    mensagem_original: rawMsg,\n    telefone: telefone,\n    instance_name: instanceName,\n    requisitante_nome: reqData.nome || '',\n    requisitante_unidade: reqData.unidade || '',\n    requisitante_existe: reqData.existe || false,\n    rag_encontrado: topMatch !== null,\n    rag_contexto: topMatch ? JSON.stringify(topMatch) : 'Nenhum sintoma ou procedimento específico foi encontrado no catálogo RAG. O usuário precisa detalhar o que está acontecendo.',\n    top_match: topMatch,\n    is_error_code: isErrorCode\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        580,
+        300
+      ],
+      "id": "c4d5e6f7-1234-5678-abcd-123456789rag",
+      "name": "Motor RAG (Busca Manual)"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Dados do Solicitante:\n- Nome: {{ $json.requisitante_nome || 'Não informado' }}\n- Unidade: {{ $json.requisitante_unidade || 'Não informada' }}\n- Já tem cadastro prévio no banco: {{ $json.requisitante_existe ? 'SIM' : 'NÃO' }}\n\nMensagem do Solicitante no WhatsApp:\n\"{{ $json.mensagem_original }}\"\n\nProcedimento Técnico RAG Disponível:\n{{ $json.rag_contexto }}",
+        "hasOutputParser": false,
+        "options": {
+          "systemMessage": "=Você é o Assistente Especialista de Suporte de TI da Secretaria Municipal de Saúde (SMS).\nSeu papel é oferecer um atendimento técnico de excelência: humanizado, acolhedor, inteligente, empático e com triagem precisa no WhatsApp.\n\nVocê SEMPRE deve responder em formato JSON estrito, sem markdown ao redor do JSON (sem ```json):\n{\n  \"acao\": \"onboarding\" | \"saudacao\" | \"investigar\" | \"orientar_nivel_1\" | \"pedir_setor\" | \"criar_chamado\",\n  \"resposta_whatsapp\": \"Texto com espaçamento duplo entre parágrafos, negritos e marcadores ricos para WhatsApp\",\n  \"problema\": \"Resumo objetivo do defeito técnico relatado com código de erro se houver, ou vazio se ainda não qualificado\",\n  \"categoria\": \"Impressoras\" | \"Rede e Conectividade\" | \"Sistemas de Saúde\" | \"Hardware e Periféricos\" | \"Sistemas e Softwares\" | \"Geral\",\n  \"equipamento\": \"Nome do equipamento (ex: Computador, Zebra ZD220, Lexmark, PEC e-SUS, etc.) ou vazio se não identificado\",\n  \"urgencia\": \"baixa\" | \"media\" | \"alta\",\n  \"tentativa_rag\": \"Resumo da orientação fornecida ou 'Abertura Direta / Nível 1 não aplicável'\",\n  \"nome_capturado\": \"Nome do solicitante\",\n  \"unidade_capturada\": \"Unidade de saúde\",\n  \"setor_capturado\": \"Setor específico (ex: Almoxarifado, Regulação, RH, Compras, Financeiro, Gabinete, ADM) se informado nesta mensagem ou histórico\"\n}\n\n### HIERARQUIA RIGOROSA DE FLUXO DE ATENDIMENTO:\n\n1. CADASTRO INICIAL (Se requisitante_existe = NÃO e ainda não sabemos Nome e Unidade):\n   - Se o usuário não possui cadastro e não se identificou: acao = 'onboarding'.\n   - Responda educadamente:\n     \"Olá! Sou o assistente de suporte de TI da Secretaria de Saúde. Como este é o seu primeiro contato, por favor, me informe o seu *Nome Completo* e qual a sua *Unidade de Saúde* para iniciarmos o atendimento.\"\n\n2. SAUDAÇÃO PURA (Se o usuário apenas enviou \"oi\", \"olá\", \"bom dia\", \"boa tarde\" sem relatar equipamento ou problema):\n   - acao = 'saudacao'.\n   - Cumprimente de forma acolhedora e pergunte como pode ajudar hoje.\n\n3. TRAVA DE INVESTIGAÇÃO DE DEFEITO (REGRA ANTI-CHAMADO PREMATURO):\n   - ⚠️ REGRA CRÍTICA: Se a mensagem do usuário for GENÉRICA ou citar apenas o nome de um equipamento SEM descrever qual é o defeito ou sintoma (Exemplos: \"meu computador\", \"computador\", \"minha impressora\", \"pc\", \"o sistema\", \"ajuda\", \"não funciona\", \"problema no pc\", \"socorro\"):\n   - 🛑 É PROIBIDO ABRIR CHAMADO E É PROIBIDO PEDIR SETOR NESTE MOMENTO!\n   - Defina OBRIGATORIAMENTE: acao = 'investigar'.\n   - Responda de forma empática investigando o que está acontecendo e dando opções claras para orientar o usuário:\n     \"Olá, {Nome}! Para que eu possa te ajudar da melhor forma, poderia me detalhar o que está acontecendo com o seu computador?\n\nPor exemplo:\n• Ele não está ligando ou está sem sinal no monitor?\n• Apareceu tela azul, travamento ou algum código de erro na tela?\n• Está sem conexão com a internet ou travando em algum programa/sistema (ex: e-SUS)?\n\nMe conte o que ocorre para tentarmos resolver ou acionarmos o suporte correto!\"\n\n4. AUTOATENDIMENTO NÍVEL 1 (Apenas para problemas de software/rede simples que possuem solução rápida no catálogo RAG e NUNCA foram tentados nesta conversa):\n   - Se o usuário detalhou um problema leve operacional: acao = 'orientar_nivel_1'.\n   - Apresente os passos em negrito:\n     \"Olá, {Nome}! Para resolver esse problema no(a) {Equipamento}, siga estes passos rápidos:\n\n1. *Passo 1:* Descrição clara...\n2. *Passo 2:* Descrição clara...\n\n👉 Esses passos funcionaram para você? Se não resolver, me avise para abrirmos o chamado técnico imediatamente!\"\n\n5. QUANDO O CHAMADO TÉCNICO DEVE SER ABERTO:\n   Um chamado SÓ deve ser aberto nos seguintes casos:\n   a) Erro Crítico / Código Grave de Sistema (ex: ffx..., 0x..., tela azul BSOD, desligando sozinho, travamento total de hardware);\n   b) O usuário executou a orientação de Nível 1 e informou que NÃO funcionou (\"não deu certo\", \"continua o mesmo erro\", \"não resolveu\");\n   c) O usuário reenviou a mesma mensagem com erro persistente ou relatou defeito físico claro (ex: monitor queimado, nobreak apitando).\n\n6. REGRA DO SETOR NA SECRETARIA DE SAÚDE (COLETA JUST-IN-TIME):\n   - Quando for confirmada a necessidade de abrir o chamado técnico (conforme regra 5) E a unidade do solicitante for \"Secretaria de Saúde\", \"SMS\", \"Sede\" ou \"Sede Administrativa\":\n   - Verifique se o setor/sala já foi informado nesta conversa ou cadastro prévio:\n     • Se o setor AINDA NÃO FOI INFORMADO:\n       acao = 'pedir_setor'.\n       Responda explicando claramente:\n       \"Compreendi perfeitamente o problema no seu {Equipamento} ({Problema}). Como você está localizado(a) na *Secretaria de Saúde*, por favor me informe qual é o seu *Setor ou Sala* (ex: Almoxarifado, Regulação, RH, Compras, Financeiro, Gabinete, ADM) para que eu possa gerar o chamado e o técnico se dirigir ao local correto.\"\n     • Se o setor JÁ FOI INFORMADO (ou se o usuário acabou de responder o setor após você pedir):\n       acao = 'criar_chamado'.\n       Capture o setor no campo setor_capturado, utilize o problema já relatado e emita o cartão de protocolo elegante.\n\n7. COMPROVANTE DE PROTOCOLO (Quando acao = 'criar_chamado'):\n   \"Entendido, {Nome}. Registrei o seu chamado técnico para a unidade *{Unidade}*.\n\n*Protocolo de Atendimento:*\n• *Unidade:* {Unidade}\n• *Setor:* {Setor} (se houver)\n• *Equipamento/Categoria:* {Categoria} ({Equipamento})\n• *Problema:* {Problema}\n• *Status:* Aberto (Aguardando técnico)\n\nNossa equipe de TI já foi notificada em tempo real no painel e em breve um técnico entrará em contato ou irá até o local. Posso ajudar com algo mais?\"\n\n### REGRAS VISUAIS OBRIGATÓRIAS:\n- Separe parágrafos SEMPRE com linha em branco dupla (\\n\\n).\n- Use *negrito* nos nomes, unidades, passos e títulos.\n- Use marcadores • nas listas para dar clareza no WhatsApp."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        820,
+        300
+      ],
+      "id": "d5e6f7a8-1234-5678-abcd-agentia999",
+      "name": "AI Agent (RAG Grounded)"
+    },
+    {
+      "parameters": {
+        "model": "models/gemini-3.1-flash-lite",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        740,
+        520
+      ],
+      "id": "f8a9b0c1-1234-5678-abcd-geminimodel1",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Webhook WhatsApp').first().json.body?.data?.key?.remoteJid || $('Webhook WhatsApp').first().json.body?.phone || 'sessao_padrao' }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        940,
+        520
+      ],
+      "id": "e3f4a5b6-1234-5678-abcd-memorybuffer1",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Decodifica a resposta da IA e normaliza setor e metadados do solicitante\nconst rawOutput = $json.output || $json.text || '';\nlet parsed = {};\n\ntry {\n  const clean = rawOutput.replace(/```json/g, '').replace(/```/g, '').trim();\n  parsed = JSON.parse(clean);\n} catch (e) {\n  const rag = $('Motor RAG (Busca Manual)').first().json;\n  parsed = {\n    acao: 'investigar',\n    resposta_whatsapp: `Recebi sua mensagem sobre *\"${rag.mensagem_original}\"*.\n\nPoderia me informar qual o equipamento (ex: Computador, Impressora, Sistema) e mais detalhes do ocorrido para que possamos te ajudar ou registrar o chamado?`,\n    problema: rag.mensagem_original,\n    categoria: 'Geral',\n    equipamento: '',\n    urgencia: 'media',\n    tentativa_rag: ''\n  };\n}\n\nconst ragData = $('Motor RAG (Busca Manual)').first().json;\nconst nomeFinal = parsed.nome_capturado || ragData.requisitante_nome || 'Solicitante';\nlet unidadeFinal = parsed.unidade_capturada || ragData.requisitante_unidade || 'Secretaria de Saúde';\nconst setorFinal = parsed.setor_capturado || '';\n\n// Se for Secretaria de Saúde e houver setor capturado, anexa na unidade se já não estiver presente\nif (setorFinal && /secretaria|sms|sede/i.test(unidadeFinal) && !unidadeFinal.toLowerCase().includes(setorFinal.toLowerCase())) {\n  unidadeFinal = `${unidadeFinal} - Setor ${setorFinal}`;\n}\n\nreturn [{\n  json: {\n    ...parsed,\n    telefone: ragData.telefone,\n    instance_name: ragData.instance_name || 'suporte-chamados',\n    nome: nomeFinal,\n    unidade: unidadeFinal,\n    setor: setorFinal\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        300
+      ],
+      "id": "e6f7a8b9-1234-5678-abcd-parser123456",
+      "name": "Processa Decisão da IA"
     },
     {
       "parameters": {
         "conditions": {
-          "boolean": [
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
             {
-              "value1": "={{ $json.existe }}",
-              "value2": true
+              "id": "cond-chamado",
+              "leftValue": "={{ $json.acao }}",
+              "rightValue": "criar_chamado",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
             }
-          ]
+          ],
+          "combinator": "and"
         }
       },
-      "id": "c4d5e6f7-1234-5678-abcd-123456789abc",
-      "name": "Usuário Existe?",
       "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [ 600, 300 ]
-    },
-    {
-      "parameters": {
-        "model": "gemini-pro",
-        "messages": {
-          "messageValues": [
-            {
-              "role": "user",
-              "message": "={{ $('Webhook').item.json.body.data.message.conversation }}"
-            }
-          ]
-        },
-        "systemMessage": "Você é um assistente de TI. Extraia o problema do usuário. Responda apenas com a descrição resumida do problema, sem formatação extra."
-      },
-      "id": "d5e6f7a8-1234-5678-abcd-123456789abc",
-      "name": "Google Gemini",
-      "type": "@n8n/n8n-nodes-langchain.chainLlm",
-      "typeVersion": 1.4,
-      "position": [ 800, 200 ]
+      "typeVersion": 2,
+      "position": [
+        1320,
+        300
+      ],
+      "id": "f7a8b9c0-1234-5678-abcd-ifdecisao123",
+      "name": "Ação é Criar Chamado?"
     },
     {
       "parameters": {
@@ -79,24 +156,93 @@
           "parameters": [
             {
               "name": "telefone",
-              "value": "={{ $('Webhook').item.json.body.data.key.remoteJid.replace('@s.whatsapp.net', '') }}"
+              "value": "={{ $json.telefone }}"
             },
             {
               "name": "problema",
-              "value": "={{ $json.text }}"
+              "value": "={{ $json.problema }}"
+            },
+            {
+              "name": "categoria",
+              "value": "={{ $json.categoria }}"
+            },
+            {
+              "name": "equipamento",
+              "value": "={{ $json.equipamento }}"
+            },
+            {
+              "name": "urgencia",
+              "value": "={{ $json.urgencia }}"
+            },
+            {
+              "name": "tentativa_rag",
+              "value": "={{ $json.tentativa_rag }}"
+            },
+            {
+              "name": "nome",
+              "value": "={{ $json.nome }}"
+            },
+            {
+              "name": "unidade",
+              "value": "={{ $json.unidade }}"
+            },
+            {
+              "name": "setor",
+              "value": "={{ $json.setor }}"
             }
           ]
-        }
+        },
+        "options": {}
       },
-      "id": "e6f7a8b9-1234-5678-abcd-123456789abc",
-      "name": "Cria Chamado",
       "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
-      "position": [ 1000, 200 ]
+      "typeVersion": 4.2,
+      "position": [
+        1560,
+        180
+      ],
+      "id": "a1b2c3d4-1234-5678-abcd-postchamado45",
+      "name": "Cria Chamado na API"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://evolution-api:8080/message/sendText/{{ $('Processa Decisão da IA').first().json.instance_name || 'suporte-chamados' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "vitor123"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ $('Processa Decisão da IA').first().json.telefone }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $('Processa Decisão da IA').first().json.resposta_whatsapp }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1800,
+        300
+      ],
+      "id": "d9e8f7c6-1234-5678-abcd-sendwhatsapp99",
+      "name": "Envia Mensagem WhatsApp"
     }
   ],
   "connections": {
-    "Webhook": {
+    "Webhook WhatsApp": {
       "main": [
         [
           {
@@ -111,30 +257,91 @@
       "main": [
         [
           {
-            "node": "Usuário Existe?",
+            "node": "Motor RAG (Busca Manual)",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Usuário Existe?": {
+    "Motor RAG (Busca Manual)": {
       "main": [
         [
           {
-            "node": "Google Gemini",
+            "node": "AI Agent (RAG Grounded)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent (RAG Grounded)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent (RAG Grounded)",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent (RAG Grounded)": {
+      "main": [
+        [
+          {
+            "node": "Processa Decisão da IA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Processa Decisão da IA": {
+      "main": [
+        [
+          {
+            "node": "Ação é Criar Chamado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ação é Criar Chamado?": {
+      "main": [
+        [
+          {
+            "node": "Cria Chamado na API",
             "type": "main",
             "index": 0
           }
         ],
-        []
+        [
+          {
+            "node": "Envia Mensagem WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Google Gemini": {
+    "Cria Chamado na API": {
       "main": [
         [
           {
-            "node": "Cria Chamado",
+            "node": "Envia Mensagem WhatsApp",
             "type": "main",
             "index": 0
           }
@@ -142,6 +349,13 @@
       ]
     }
   },
-  "settings": {},
-  "pinData": {}
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "1"
 }

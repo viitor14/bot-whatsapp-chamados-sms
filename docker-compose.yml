@@ -11,13 +11,14 @@ services:
       - NODE_ENV=production
       - WEBHOOK_URL=http://localhost:5678/
       - GENERIC_TIMEZONE=America/Sao_Paulo
+      - N8N_SECURE_COOKIE=false
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
       - n8n_data:/home/node/.n8n
 
   evolution-api:
-    image: atendesmart/evolution-api:v2.1.1
+    image: evoapicloud/evolution-api:latest
     restart: always
     ports:
       - "8080:8080"
