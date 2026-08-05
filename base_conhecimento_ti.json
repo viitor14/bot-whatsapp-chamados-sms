@@ -1,0 +1,82 @@
+[
+  {
+    "id": "KB-IMP-001",
+    "categoria": "Impressoras",
+    "equipamentos": ["Zebra ZD220", "Zebra GC420t", "Elgin L42 Pro", "Impressora de Etiqueta", "Etiqueta"],
+    "tags": ["etiqueta", "luz vermelha", "travada", "calibracao", "sensor", "impressora termica"],
+    "sintoma": "Impressora térmica de etiqueta piscando luz vermelha ou desalinhada",
+    "solucao_nivel_1": "1. Desligue a impressora no botão de energia traseiro.\n2. Abra a tampa e verifique se o rolo de etiquetas está encaixado e passando pelo sensor móvel amarelo/verde.\n3. Feche a tampa com firmeza até ouvir os dois cliques laterais.\n4. Para calibrar: com a impressora ligada, segure o botão de avanço (Feed) por 3 segundos até piscar e solte para avançar uma etiqueta corretamente.",
+    "requer_visita": false,
+    "criterio_visita": "Se a luz continuar vermelha após reiniciar e calibrar, ou se o sensor físico estiver solto/quebrado."
+  },
+  {
+    "id": "KB-IMP-002",
+    "categoria": "Impressoras",
+    "equipamentos": ["Lexmark", "Brother", "HP LaserJet", "Ricoh", "Impressora Laser", "Multifuncional"],
+    "tags": ["papel preso", "atolamento", "impressao fraca", "spooler", "nao imprime", "laser"],
+    "sintoma": "Impressora não imprime / Documento travado na fila / Papel atolado",
+    "solucao_nivel_1": "1. Abra a porta frontal ou traseira da impressora e retire com cuidado qualquer folha de papel presa, puxando no sentido da saída.\n2. Verifique se há folhas suficientes e bem alinhadas na bandeja 1.\n3. No computador, abra o menu Iniciar, digite 'Serviços', localize 'Spooler de Impressão', clique com o botão direito e selecione 'Reiniciar'.",
+    "requer_visita": false,
+    "criterio_visita": "Se a impressora exibir mensagem de 'Troca de Fusor / Cilindro' ou barulho alto de engrenagem quebrada."
+  },
+  {
+    "id": "KB-RED-001",
+    "categoria": "Rede e Conectividade",
+    "equipamentos": ["Computador", "Cabo de Rede", "Switch", "Roteador", "Internet"],
+    "tags": ["sem internet", "cabo desconectado", "rede", "globo sem internet", "dns", "lentidao"],
+    "sintoma": "Computador sem acesso à internet ou com aviso 'Sem Internet / Cabo Desconectado'",
+    "solucao_nivel_1": "1. Verifique o cabo de rede (azul ou cinza) atrás do gabinete: a luz LED deve estar acesa/piscando.\n2. Desconecte o cabo de rede, aguarde 5 segundos e reconecte firmemente até escutar o clique da trava.\n3. Verifique se os outros computadores da mesma sala também estão sem internet (se sim, o switch da sala pode estar desligado da tomada).",
+    "requer_visita": false,
+    "criterio_visita": "Se a tomada de rede da parede estiver rompida ou o switch do setor estiver queimado."
+  },
+  {
+    "id": "KB-SIS-001",
+    "categoria": "Sistemas de Saúde",
+    "equipamentos": ["PEC e-SUS", "Prontuário Eletrônico", "BPA", "SISREG", "Sistema Municipal"],
+    "tags": ["esus", "pec", "tela branca", "sistema fora", "login invalido", "erro servidor"],
+    "sintoma": "Sistema e-SUS / PEC com tela branca, carregamento infinito ou erro de conexão com servidor",
+    "solucao_nivel_1": "1. No navegador (Chrome/Edge), pressione juntas as teclas 'Ctrl + Shift + R' para forçar a limpeza do cache da página.\n2. Certifique-se de que está digitando o endereço IP correto do servidor local da unidade (ex: http://192.168.x.x:8080/pec).\n3. Tente abrir o sistema em uma 'Janela Anônima' (Ctrl + Shift + N).",
+    "requer_visita": false,
+    "criterio_visita": "Se o servidor físico do e-SUS na unidade estiver desligado, travado ou com disco cheio."
+  },
+  {
+    "id": "KB-SIS-002",
+    "categoria": "Sistemas de Saúde",
+    "equipamentos": ["Certificado Digital", "Token A3", "Cartão SUS", "Leitora de Cartão"],
+    "tags": ["token", "certificado", "leitora", "pin invalido", "nao reconhecido", "assinatura"],
+    "sintoma": "Token ou Certificado Digital A3 não reconhecido no sistema / Erro de assinatura",
+    "solucao_nivel_1": "1. Desconecte o token USB ou leitora de cartão e conecte em outra porta USB traseira do computador.\n2. Verifique se o aplicativo 'SafeSign' ou 'Admin Token' na bandeja do Windows reconhece o dispositivo com luz verde.\n3. Reinicie o navegador antes de tentar assinar novamente.",
+    "requer_visita": false,
+    "criterio_visita": "Se o leitor USB estiver com defeito físico ou certificado expirado necessitando renovação."
+  },
+  {
+    "id": "KB-HRD-001",
+    "categoria": "Hardware e Periféricos",
+    "equipamentos": ["Leitor de Código de Barras", "Leitor Óptico", "Scanner de Cartão SUS"],
+    "tags": ["leitor", "codigo de barras", "nao le", "bip", "leitora de receita"],
+    "sintoma": "Leitor de código de barras não emite feixe de luz ou não lê os códigos na tela",
+    "solucao_nivel_1": "1. Troque o cabo USB do leitor para uma porta USB direta na parte de trás do gabinete.\n2. Se o leitor estiver bipando sem digitar, escaneie o código de barras 'Restaurar Padrão de Fábrica / USB HID' impresso no manual fixado na bancada.",
+    "requer_visita": false,
+    "criterio_visita": "Se o feixe laser estiver apagado permanentemente ou cabo com mau contato interno."
+  },
+  {
+    "id": "KB-HRD-002",
+    "categoria": "Hardware e Periféricos",
+    "equipamentos": ["Computador", "Gabinete", "CPU", "Monitor"],
+    "tags": ["nao liga", "tela preta", "sem sinal", "bip continuo", "desligando sozinho"],
+    "sintoma": "Computador não liga, monitor exibe 'Sem Sinal' ou emite bips sonoros",
+    "solucao_nivel_1": "1. Verifique se os cabos de força do gabinete e do monitor estão bem firmes na tomada/nobreak.\n2. Verifique se o cabo de vídeo (VGA/HDMI) atrás do monitor e da CPU está bem parafusado/encaixado.\n3. Pressione o botão liga/desliga por 10 segundos para descarregar a energia estática e tente ligar novamente.",
+    "requer_visita": true,
+    "criterio_visita": "Se o computador continuar não dando sinal de vídeo, emitir bips ou apresentar cheiro de queimado."
+  },
+  {
+    "id": "KB-PWR-001",
+    "categoria": "Energia e Nobreak",
+    "equipamentos": ["Nobreak", "Estabilizador", "Filtro de Linha"],
+    "tags": ["nobreak", "apito", "bipando", "desarmou", "cheiro de queimado", "bateria"],
+    "sintoma": "Nobreak apitando continuamente ou desligando as máquinas do setor",
+    "solucao_nivel_1": "1. Verifique se foram ligados aparelhos de alto consumo no nobreak (como cafeteiras, aquecedores, impressoras laser ou ventiladores) e DESCONECTE-OS IMEDIATAMENTE (nobreaks de TI suportam apenas CPUs e monitores).\n2. Pressione o botão frontal do nobreak para silenciar o alarme.",
+    "requer_visita": true,
+    "criterio_visita": "Se o nobreak continuar apitando com pouca carga ou a bateria não segurar energia durante oscilações."
+  }
+]
