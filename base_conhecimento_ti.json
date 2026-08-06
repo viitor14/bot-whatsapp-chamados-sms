@@ -1,82 +1,496 @@
 [
   {
-    "id": "KB-IMP-001",
+    "id": "KB-IMP-REMOTE-ANYDESK",
     "categoria": "Impressoras",
-    "equipamentos": ["Zebra ZD220", "Zebra GC420t", "Elgin L42 Pro", "Impressora de Etiqueta", "Etiqueta"],
-    "tags": ["etiqueta", "luz vermelha", "travada", "calibracao", "sensor", "impressora termica"],
+    "equipamentos": [
+      "Canon Maxify GX6000",
+      "Canon GX7000",
+      "Canon GX4010",
+      "Canon iR 1643",
+      "Kyocera M2040",
+      "Kyocera 2035dn",
+      "Brother 1617",
+      "AnyDesk",
+      "Driver de Impressora",
+      "Instalação Remota"
+    ],
+    "tags": [
+      "instalar impressora",
+      "instalacao de impressora",
+      "instalar a impressora",
+      "instalar impressora no computador",
+      "instalar impressora no pc",
+      "colocar impressora",
+      "adicionar impressora",
+      "driver",
+      "drivers",
+      "configurar impressora",
+      "anydesk",
+      "acesso remoto",
+      "suporte remoto",
+      "remotamente"
+    ],
+    "sintoma": "Necessidade de instalar impressora no computador, configurar drivers ou suporte de software / Atendimento Remoto via AnyDesk",
+    "solucao_nivel_1": "1. *Instalação Remota via AnyDesk:* A instalação de impressoras no seu computador pode ser realizada de forma rápida e segura remotamente pela equipe de TI via AnyDesk.\n2. *Como Localizar o AnyDesk:* Abra o aplicativo *AnyDesk* (ícone vermelho na Área de Trabalho) e veja o número de 9 dígitos em 'Este Posto de Trabalho'.\n3. *Dados Obrigatórios:* Solicitar ao usuário o *Número do AnyDesk* e o *Modelo da Impressora* (ex: Canon GX 6000, Kyocera M2040, Brother 1617).\n4. *Abertura de Chamado Remoto:* Ao receber o AnyDesk e o modelo, abrir o chamado técnico remoto para conexão da equipe.",
+    "requer_visita": false,
+    "criterio_visita": "Registrar chamado com a tag '[Suporte Remoto via AnyDesk: <ID>] - Instalação da impressora <MODELO>' para o técnico conectar remotamente."
+  },
+  {
+    "id": "KB-IMP-REDE",
+    "categoria": "Impressoras",
+    "equipamentos": [
+      "Canon Maxify GX6000",
+      "Canon GX7000",
+      "Canon GX4010",
+      "Canon iR 1643",
+      "Canon iR1643i",
+      "Kyocera M2040",
+      "Kyocera 2035dn",
+      "Brother 1617",
+      "Impressora de Rede",
+      "Multifuncional"
+    ],
+    "tags": [
+      "canon gx6000",
+      "gx6000",
+      "gx 6000",
+      "gx4010",
+      "gx 4010",
+      "gx7000",
+      "gx 7000",
+      "ir1643",
+      "ir 1643",
+      "canon",
+      "kyocera",
+      "m2040",
+      "2035dn",
+      "brother 1617",
+      "cabo azul",
+      "xerox saindo",
+      "so sai xerox",
+      "nao sai do computador",
+      "nao imprime do pc",
+      "xerox normal",
+      "apenas xerox",
+      "impressora de rede",
+      "rede prefeitura",
+      "nao comunica"
+    ],
+    "sintoma": "Impressora tira cópia/xerox normalmente (hardware OK), mas o computador não consegue imprimir / Conectada na Rede da Prefeitura",
+    "solucao_nivel_1": "1. *Impressora na Rede da Prefeitura:* as impressoras da unidade funcionam configuradas na rede interna da Prefeitura via cabo de rede azul.\n2. *Verificar Conexão do Computador:* certifique-se de que o seu computador está conectado na *Rede da Prefeitura via Cabo de Rede (cabo azul/cinza)* ou no *Wi-Fi corporativo oficial da Prefeitura* e *NÃO em uma rede Wi-Fi externa / 4G / celular* (se estiver no Wi-Fi externo, o computador não consegue encontrar a impressora na rede interna).\n3. *Desativar Wi-Fi Externo:* se o Wi-Fi do computador estiver ligado em outra rede, desative-o e garanta que o cabo de rede esteja bem encaixado atrás da CPU com a luz LED acesa/piscando.\n4. *Testar Impressão:* envie uma nova impressão de teste.",
+    "requer_visita": false,
+    "criterio_visita": "Se o computador já estiver conectado via cabo na rede da prefeitura, a impressora desmarcada de 'Offline' e mesmo assim não imprimir."
+  },
+  {
+    "id": "KB-IMP-CANON-SUP",
+    "categoria": "Impressoras",
+    "equipamentos": [
+      "Canon GX 4010",
+      "Canon GX 6000",
+      "Canon GX 7000",
+      "Canon iR 1643",
+      "Canon iR1643i",
+      "Canon MegaTank",
+      "Canon"
+    ],
+    "tags": [
+      "tinta canon",
+      "recarga tinta",
+      "tinta gx6000",
+      "tinta gx4010",
+      "tinta gx7000",
+      "toner canon",
+      "toner ir1643",
+      "toner t06",
+      "papel canon",
+      "caixa de manutencao",
+      "mc-g01",
+      "pedir tinta",
+      "pedir toner",
+      "solicitar papel"
+    ],
+    "sintoma": "Solicitação de Tinta, Toner (T06), Papel ou Caixa de Manutenção para impressoras Canon (GX 4010, 6000, 7000, iR 1643)",
+    "solucao_nivel_1": "📦 *SOLICITAÇÃO DE SUPRIMENTOS (EMPRESA ARTJET):*\nO fornecimento de tinta, toner e papel para as impressoras Canon (GX 4010, GX 6000, GX 7000 e iR 1643) é realizado diretamente pela empresa contratada *Artjet*.\n\n👉 *Como solicitar:*\nEnvie uma mensagem informando a sua unidade e o suprimento necessário para o WhatsApp da Artjet:\n📲 *WhatsApp Artjet:* (81) 9602-8423",
+    "requer_visita": false,
+    "criterio_visita": "Suprimentos são atendidos diretamente pela Artjet."
+  },
+  {
+    "id": "KB-IMP-CANON-GX-DIAG",
+    "categoria": "Impressoras",
+    "equipamentos": [
+      "Canon GX 4010",
+      "Canon GX 6000",
+      "Canon GX 7000",
+      "Canon MegaTank"
+    ],
+    "tags": [
+      "impressao borrada",
+      "falha de cor",
+      "falha de impressao",
+      "limpeza de cabecote",
+      "1300",
+      "1303",
+      "1304",
+      "1726",
+      "papel preso canon",
+      "atolamento canon"
+    ],
+    "sintoma": "Canon GX com impressão borrada, listras, cores falhando ou papel atolado (Códigos 1300/1303)",
+    "solucao_nivel_1": "1. *Impressão falhando ou borrada:* no painel da impressora, acesse *Configurações > Manutenção > Limpeza de Cabeçote* (se persistir, execute a Limpeza Profunda).\n2. *Papel Preso (Código 1300/1303):* abra a tampa traseira ou puxe a gaveta de papel frontal e retire a folha presa com cuidado no sentido da saída sem rasgar.\n3. *Caixa de Manutenção Cheia (Código 1726):* solicite a troca do cartucho de manutenção MC-G01 diretamente à Artjet pelo WhatsApp (81) 9602-8423.",
+    "requer_visita": false,
+    "criterio_visita": "Se a limpeza de cabeçote não resolver a falha de impressão ou ocorrer código de erro físico no visor."
+  },
+  {
+    "id": "KB-IMP-CANON-IR-DIAG",
+    "categoria": "Impressoras",
+    "equipamentos": [
+      "Canon iR 1643",
+      "Canon iR1643i",
+      "Canon imageRUNNER"
+    ],
+    "tags": [
+      "ir1643",
+      "ir 1643",
+      "canon ir",
+      "papel preso ir1643",
+      "dadf",
+      "atolamento ir1643",
+      "offline ir1643"
+    ],
+    "sintoma": "Canon imageRUNNER 1643 com papel atolado, erro no alimentador DADF ou travada",
+    "solucao_nivel_1": "1. *Papel preso na gaveta/corpo:* abra a tampa frontal e lateral direita da Canon iR 1643, puxe a folha presa sem puxar engrenagens e feche a tampa com firmeza.\n2. *Papel preso no alimentador superior (DADF):* levante a tampa superior do scanner e retire a folha presa delicadamente.\n3. *Mensagem de Toner Baixo:* solicite o toner T06 à Artjet pelo WhatsApp (81) 9602-8423.",
+    "requer_visita": false,
+    "criterio_visita": "Se a impressora acusar código de erro de fusor ou não inicializar o sistema."
+  },
+  {
+    "id": "KB-IMP-KYO-SUP",
+    "categoria": "Impressoras",
+    "equipamentos": [
+      "Kyocera M2040",
+      "Kyocera 2035dn",
+      "Kyocera ECOSYS",
+      "Kyocera"
+    ],
+    "tags": [
+      "toner kyocera",
+      "toner m2040",
+      "toner 2035",
+      "substituir toner kyocera",
+      "papel kyocera",
+      "pedir toner m2040",
+      "pedir toner 2035dn"
+    ],
+    "sintoma": "Solicitação de Toner ou Papel para impressoras Kyocera M2040 / 2035dn",
+    "solucao_nivel_1": "📦 *SOLICITAÇÃO DE SUPRIMENTOS (EMPRESA ARTJET):*\nO fornecimento de toner e papel para as impressoras Kyocera (M2040 e 2035dn) é de responsabilidade da empresa contratada *Artjet*.\n\n👉 *Como solicitar:*\nEnvie uma mensagem informando a sua unidade e o modelo da impressora para o WhatsApp da Artjet:\n📲 *WhatsApp Artjet:* (81) 9602-8423",
+    "requer_visita": false,
+    "criterio_visita": "Suprimentos são atendidos diretamente pela Artjet."
+  },
+  {
+    "id": "KB-IMP-KYO-DIAG",
+    "categoria": "Impressoras",
+    "equipamentos": [
+      "Kyocera M2040",
+      "Kyocera 2035dn",
+      "Kyocera ECOSYS"
+    ],
+    "tags": [
+      "jam 0000",
+      "jam 0100",
+      "jam 0500",
+      "papel preso kyocera",
+      "atolamento kyocera",
+      "alavanca verde kyocera",
+      "m2040 travada",
+      "2035dn travada"
+    ],
+    "sintoma": "Kyocera M2040 ou 2035dn com papel preso / atolamento (Jam 0000/0100/0500)",
+    "solucao_nivel_1": "1. *Desobstrução Segura:* abra a tampa frontal da Kyocera e a tampa traseira.\n2. *Alavancas Verdes:* levante as alavancas verdes internas para liberar a pressão dos roletes e puxe o papel preso suavemente no sentido de saída.\n3. *Fechar com Firmeza:* abaixe as alavancas verdes e feche as tampas frontal e traseira até travarem.",
+    "requer_visita": false,
+    "criterio_visita": "Se a folha tiver rasgado dentro da unidade fusora ou se a mensagem de atolamento não sumir após retirar o papel."
+  },
+  {
+    "id": "KB-IMP-BROTHER-SUP",
+    "categoria": "Impressoras",
+    "equipamentos": [
+      "Brother 1617",
+      "Brother DCP-1617NW",
+      "Brother"
+    ],
+    "tags": [
+      "toner brother",
+      "toner 1617",
+      "toner dcp1617",
+      "substituir toner brother",
+      "substituir tambor brother",
+      "drum brother",
+      "papel brother",
+      "manutencao brother 1617"
+    ],
+    "sintoma": "Solicitação de Toner (TN-1060), Tambor (DR-1060), Papel ou Manutenção para impressora Brother 1617",
+    "solucao_nivel_1": "🔧 *EQUIPE INTERNA DE TI (SMS):*\nA impressora Brother 1617 é mantida 100% pela nossa equipe interna de TI da Prefeitura. Vou registrar o seu chamado para levarmos o toner/suprimento ou realizarmos o atendimento na sua unidade.",
+    "requer_visita": true,
+    "criterio_visita": "Todos os atendimentos de suprimento e manutenção da Brother 1617 são executados presencialmente pela equipe de TI da SMS."
+  },
+  {
+    "id": "KB-IMP-BROTHER-DIAG",
+    "categoria": "Impressoras",
+    "equipamentos": [
+      "Brother 1617",
+      "Brother DCP-1617NW",
+      "Brother"
+    ],
+    "tags": [
+      "papel preso brother",
+      "sem papel brother",
+      "1617 travada",
+      "luz erro brother",
+      "brother nao puxa papel"
+    ],
+    "sintoma": "Brother 1617 não puxa papel, acusa sem papel ou papel atolado",
+    "solucao_nivel_1": "1. *Folhear o Papel:* retire as folhas da bandeja, folheie bem o maço para retirar a estática/umidade e coloque novamente alinhado.\n2. *Ajustar Guias:* ajuste as guias plásticas laterais para encostar no papel sem apertar.\n3. *Papel Preso:* levante a unidade do scanner, abra a tampa superior, retire o conjunto toner/tambor e puxe a folha presa.\n4. *Reiniciar:* feche as tampas e aperte o botão Power 1 vez.",
+    "requer_visita": false,
+    "criterio_visita": "Se a impressora continuar com a luz de exclamação vermelha piscando ou não puxar papel."
+  },
+  {
+    "id": "KB-IMP-ETIQUETA",
+    "categoria": "Impressoras",
+    "equipamentos": [
+      "Zebra ZD220",
+      "Zebra GC420t",
+      "Elgin L42 Pro",
+      "Impressora de Etiqueta",
+      "Etiqueta",
+      "Zebra",
+      "Elgin"
+    ],
+    "tags": [
+      "etiqueta",
+      "luz vermelha",
+      "travada",
+      "calibracao",
+      "sensor",
+      "impressora termica",
+      "piscando vermelho",
+      "ribbon"
+    ],
     "sintoma": "Impressora térmica de etiqueta piscando luz vermelha ou desalinhada",
-    "solucao_nivel_1": "1. Desligue a impressora no botão de energia traseiro.\n2. Abra a tampa e verifique se o rolo de etiquetas está encaixado e passando pelo sensor móvel amarelo/verde.\n3. Feche a tampa com firmeza até ouvir os dois cliques laterais.\n4. Para calibrar: com a impressora ligada, segure o botão de avanço (Feed) por 3 segundos até piscar e solte para avançar uma etiqueta corretamente.",
+    "solucao_nivel_1": "1. *Desligar a impressora:* no botão de energia traseiro.\n2. *Ajustar guias:* abra a tampa e verifique se o rolo de etiquetas está passando pelo sensor móvel sem apertar.\n3. *Fechar com firmeza:* feche a tampa até ouvir os dois cliques laterais.\n4. *Calibrar sensor:* ligue segurando o botão de avanço (Feed) por 3 segundos até piscar e solte.",
     "requer_visita": false,
-    "criterio_visita": "Se a luz continuar vermelha após reiniciar e calibrar, ou se o sensor físico estiver solto/quebrado."
+    "criterio_visita": "Se a luz continuar vermelha após calibrar ou sensor quebrado."
   },
   {
-    "id": "KB-IMP-002",
-    "categoria": "Impressoras",
-    "equipamentos": ["Lexmark", "Brother", "HP LaserJet", "Ricoh", "Impressora Laser", "Multifuncional"],
-    "tags": ["papel preso", "atolamento", "impressao fraca", "spooler", "nao imprime", "laser"],
-    "sintoma": "Impressora não imprime / Documento travado na fila / Papel atolado",
-    "solucao_nivel_1": "1. Abra a porta frontal ou traseira da impressora e retire com cuidado qualquer folha de papel presa, puxando no sentido da saída.\n2. Verifique se há folhas suficientes e bem alinhadas na bandeja 1.\n3. No computador, abra o menu Iniciar, digite 'Serviços', localize 'Spooler de Impressão', clique com o botão direito e selecione 'Reiniciar'.",
-    "requer_visita": false,
-    "criterio_visita": "Se a impressora exibir mensagem de 'Troca de Fusor / Cilindro' ou barulho alto de engrenagem quebrada."
-  },
-  {
-    "id": "KB-RED-001",
+    "id": "KB-RED-GERAL",
     "categoria": "Rede e Conectividade",
-    "equipamentos": ["Computador", "Cabo de Rede", "Switch", "Roteador", "Internet"],
-    "tags": ["sem internet", "cabo desconectado", "rede", "globo sem internet", "dns", "lentidao"],
-    "sintoma": "Computador sem acesso à internet ou com aviso 'Sem Internet / Cabo Desconectado'",
-    "solucao_nivel_1": "1. Verifique o cabo de rede (azul ou cinza) atrás do gabinete: a luz LED deve estar acesa/piscando.\n2. Desconecte o cabo de rede, aguarde 5 segundos e reconecte firmemente até escutar o clique da trava.\n3. Verifique se os outros computadores da mesma sala também estão sem internet (se sim, o switch da sala pode estar desligado da tomada).",
+    "equipamentos": [
+      "Modem",
+      "ONU",
+      "Switch Principal",
+      "Roteador",
+      "Internet da Unidade"
+    ],
+    "tags": [
+      "sem internet",
+      "caiu internet",
+      "unidade toda sem internet",
+      "toda unidade",
+      "todos os computadores",
+      "sem rede",
+      "roteador",
+      "modem",
+      "fibra"
+    ],
+    "sintoma": "Queda geral de conexão com a internet em toda a unidade de saúde",
+    "solucao_nivel_1": "1. *Desligar Modem/Switch:* localize o modem/ONU da operadora (ou switch principal da unidade) e retire o cabo de energia da tomada.\n2. *Aguardar 30 segundos:* mantenha desligado por 30 segundos.\n3. *Ligar e Aguardar:* conecte novamente na tomada e aguarde 3 minutos até que as luzes (PON/Internet/WLAN) estabilizem.\n4. *Testar Conexão:* verifique em um dos computadores se a navegação retornou.",
     "requer_visita": false,
-    "criterio_visita": "Se a tomada de rede da parede estiver rompida ou o switch do setor estiver queimado."
+    "criterio_visita": "Se as luzes do modem continuarem piscando em vermelho (LOS/Alarme) ou se após 3 minutos a internet não retornar."
   },
   {
-    "id": "KB-SIS-001",
+    "id": "KB-RED-LOCAL",
+    "categoria": "Rede e Conectividade",
+    "equipamentos": [
+      "Computador",
+      "Cabo de Rede",
+      "Placa de Rede",
+      "Conector RJ45"
+    ],
+    "tags": [
+      "meu computador sem internet",
+      "apenas meu pc",
+      "globo sem internet",
+      "cabo desconectado",
+      "um computador"
+    ],
+    "sintoma": "Apenas um computador específico sem acesso à internet / Cabo de rede desconectado",
+    "solucao_nivel_1": "1. *Verificar LEDs:* confira atrás do gabinete se a luz do conector de rede (cabo azul/cinza) está acesa/piscando.\n2. *Reconectar Cabo:* retire o cabo de rede pressionando a trava plástica, aguarde 5 segundos e encaixe novamente com firmeza até ouvir o clique.\n3. *Reiniciar:* se persistir, reinicie o computador.",
+    "requer_visita": false,
+    "criterio_visita": "Se a trava do cabo RJ45 estiver quebrada, conector solto ou a tomada de rede danificada."
+  },
+  {
+    "id": "KB-SEC-VIRUS",
+    "categoria": "Segurança da Informação",
+    "equipamentos": [
+      "Computador",
+      "Sistema Operacional",
+      "Antivírus",
+      "Rede Corporativa"
+    ],
+    "tags": [
+      "virus",
+      "infectado",
+      "alerta de virus",
+      "antivirus",
+      "malware",
+      "trojan",
+      "ransomware",
+      "bloqueado por seguranca",
+      "ameaca detectada",
+      "cavalo de troia"
+    ],
+    "sintoma": "Alerta de infecção por vírus, ameaça detectada pelo antivírus ou comportamento anômalo de segurança",
+    "solucao_nivel_1": "⚠️ *ORIENTAÇÃO CRÍTICA DE SEGURANÇA (ISOLAMENTO IMEDIATO):*\n1. *Desconectar Cabo de Rede:* retire IMEDIATAMENTE o cabo de rede (azul ou cinza) atrás do computador ou desconecte o Wi-Fi para isolar a máquina e não espalhar o vírus.\n2. *Não Inserir Mídias:* NÃO conecte pendrives ou celulares no computador.\n3. *Não Clicar em Alertas:* não clique em popups e não digite senhas.\n4. *Manter Ligado:* mantenha a máquina ligada e isolada para atendimento presencial da equipe técnica.",
+    "requer_visita": true,
+    "criterio_visita": "Todos os incidentes de vírus exigem atendimento técnico presencial prioritário."
+  },
+  {
+    "id": "KB-SIS-ESUS",
     "categoria": "Sistemas de Saúde",
-    "equipamentos": ["PEC e-SUS", "Prontuário Eletrônico", "BPA", "SISREG", "Sistema Municipal"],
-    "tags": ["esus", "pec", "tela branca", "sistema fora", "login invalido", "erro servidor"],
+    "equipamentos": [
+      "PEC e-SUS",
+      "Prontuário Eletrônico",
+      "BPA",
+      "SISREG",
+      "Sistema Municipal"
+    ],
+    "tags": [
+      "esus",
+      "pec",
+      "tela branca",
+      "sistema fora",
+      "login invalido",
+      "erro servidor",
+      "502",
+      "504",
+      "prontuario fora"
+    ],
     "sintoma": "Sistema e-SUS / PEC com tela branca, carregamento infinito ou erro de conexão com servidor",
-    "solucao_nivel_1": "1. No navegador (Chrome/Edge), pressione juntas as teclas 'Ctrl + Shift + R' para forçar a limpeza do cache da página.\n2. Certifique-se de que está digitando o endereço IP correto do servidor local da unidade (ex: http://192.168.x.x:8080/pec).\n3. Tente abrir o sistema em uma 'Janela Anônima' (Ctrl + Shift + N).",
+    "solucao_nivel_1": "1. *Limpar Cache:* pressione juntos 'Ctrl + Shift + R' no navegador.\n2. *Janela Anônima:* tente abrir em aba anônima (Ctrl + Shift + N).\n3. *Endereço IP:* certifique-se de digitar o IP correto do servidor local (ex: http://192.168.x.x:8080/pec).",
     "requer_visita": false,
-    "criterio_visita": "Se o servidor físico do e-SUS na unidade estiver desligado, travado ou com disco cheio."
+    "criterio_visita": "Se o servidor físico do e-SUS na unidade estiver desligado ou travado."
   },
   {
-    "id": "KB-SIS-002",
+    "id": "KB-SIS-TOKEN",
     "categoria": "Sistemas de Saúde",
-    "equipamentos": ["Certificado Digital", "Token A3", "Cartão SUS", "Leitora de Cartão"],
-    "tags": ["token", "certificado", "leitora", "pin invalido", "nao reconhecido", "assinatura"],
+    "equipamentos": [
+      "Certificado Digital",
+      "Token A3",
+      "Cartão SUS",
+      "Leitora de Cartão"
+    ],
+    "tags": [
+      "token",
+      "certificado",
+      "leitora",
+      "pin invalido",
+      "nao reconhecido",
+      "assinatura",
+      "a3",
+      "safesign"
+    ],
     "sintoma": "Token ou Certificado Digital A3 não reconhecido no sistema / Erro de assinatura",
-    "solucao_nivel_1": "1. Desconecte o token USB ou leitora de cartão e conecte em outra porta USB traseira do computador.\n2. Verifique se o aplicativo 'SafeSign' ou 'Admin Token' na bandeja do Windows reconhece o dispositivo com luz verde.\n3. Reinicie o navegador antes de tentar assinar novamente.",
+    "solucao_nivel_1": "1. *Trocar de porta USB:* conecte o token em uma porta USB traseira direta da CPU.\n2. *Verificar SafeSign:* confira se o ícone na bandeja do Windows está com luz verde.\n3. *Reiniciar Navegador:* feche todas as abas antes de tentar assinar novamente.",
     "requer_visita": false,
-    "criterio_visita": "Se o leitor USB estiver com defeito físico ou certificado expirado necessitando renovação."
+    "criterio_visita": "Se o leitor USB estiver com defeito físico ou certificado expirado."
   },
   {
-    "id": "KB-HRD-001",
+    "id": "KB-HRD-LEITOR",
     "categoria": "Hardware e Periféricos",
-    "equipamentos": ["Leitor de Código de Barras", "Leitor Óptico", "Scanner de Cartão SUS"],
-    "tags": ["leitor", "codigo de barras", "nao le", "bip", "leitora de receita"],
+    "equipamentos": [
+      "Leitor de Código de Barras",
+      "Leitor Óptico",
+      "Scanner de Cartão SUS"
+    ],
+    "tags": [
+      "leitor",
+      "codigo de barras",
+      "nao le",
+      "bip",
+      "leitora de receita",
+      "farmacia"
+    ],
     "sintoma": "Leitor de código de barras não emite feixe de luz ou não lê os códigos na tela",
-    "solucao_nivel_1": "1. Troque o cabo USB do leitor para uma porta USB direta na parte de trás do gabinete.\n2. Se o leitor estiver bipando sem digitar, escaneie o código de barras 'Restaurar Padrão de Fábrica / USB HID' impresso no manual fixado na bancada.",
+    "solucao_nivel_1": "1. *Porta USB direta:* conecte em uma porta USB traseira direta na CPU.\n2. *Reset de Fábrica:* escaneie o código 'Restaurar Padrão de Fábrica' no manual da bancada.",
     "requer_visita": false,
-    "criterio_visita": "Se o feixe laser estiver apagado permanentemente ou cabo com mau contato interno."
+    "criterio_visita": "Se o feixe laser estiver apagado permanentemente ou cabo com defeito."
   },
   {
-    "id": "KB-HRD-002",
+    "id": "KB-HRD-ENERGIA",
     "categoria": "Hardware e Periféricos",
-    "equipamentos": ["Computador", "Gabinete", "CPU", "Monitor"],
-    "tags": ["nao liga", "tela preta", "sem sinal", "bip continuo", "desligando sozinho"],
-    "sintoma": "Computador não liga, monitor exibe 'Sem Sinal' ou emite bips sonoros",
-    "solucao_nivel_1": "1. Verifique se os cabos de força do gabinete e do monitor estão bem firmes na tomada/nobreak.\n2. Verifique se o cabo de vídeo (VGA/HDMI) atrás do monitor e da CPU está bem parafusado/encaixado.\n3. Pressione o botão liga/desliga por 10 segundos para descarregar a energia estática e tente ligar novamente.",
+    "equipamentos": [
+      "Computador",
+      "Monitor",
+      "Nobreak",
+      "Fonte",
+      "Estabilizador"
+    ],
+    "tags": [
+      "nao liga",
+      "tela preta",
+      "sem sinal",
+      "bip continuo",
+      "desligando sozinho",
+      "nobreak apitando",
+      "estalo"
+    ],
+    "sintoma": "Computador não liga, monitor sem sinal de vídeo ou nobreak apitando",
+    "solucao_nivel_1": "1. *Alimentação:* verifique se os cabos de força do gabinete e monitor estão firmes na tomada/nobreak.\n2. *Cabo de Vídeo:* confira se o cabo HDMI/VGA atrás do monitor e da CPU está fixado.\n3. *Drenar Energia:* retire da tomada, segure o botão power da CPU por 15 segundos e religue.",
     "requer_visita": true,
-    "criterio_visita": "Se o computador continuar não dando sinal de vídeo, emitir bips ou apresentar cheiro de queimado."
+    "criterio_visita": "Se o computador continuar sem sinal de vídeo ou emitir bips contínuos."
   },
   {
-    "id": "KB-PWR-001",
-    "categoria": "Energia e Nobreak",
-    "equipamentos": ["Nobreak", "Estabilizador", "Filtro de Linha"],
-    "tags": ["nobreak", "apito", "bipando", "desarmou", "cheiro de queimado", "bateria"],
-    "sintoma": "Nobreak apitando continuamente ou desligando as máquinas do setor",
-    "solucao_nivel_1": "1. Verifique se foram ligados aparelhos de alto consumo no nobreak (como cafeteiras, aquecedores, impressoras laser ou ventiladores) e DESCONECTE-OS IMEDIATAMENTE (nobreaks de TI suportam apenas CPUs e monitores).\n2. Pressione o botão frontal do nobreak para silenciar o alarme.",
-    "requer_visita": true,
-    "criterio_visita": "Se o nobreak continuar apitando com pouca carga ou a bateria não segurar energia durante oscilações."
+    "id": "KB-LOG-SLA-VEICULO",
+    "categoria": "Atendimento e Prazos",
+    "equipamentos": [
+      "Atendimento de Campo",
+      "Chamados SMS",
+      "Visita Técnica Presencial"
+    ],
+    "tags": [
+      "vai demorar",
+      "demora muito",
+      "quando vem",
+      "quando chega",
+      "qual o prazo",
+      "quanto tempo",
+      "previsao",
+      "esta a caminho",
+      "ja estao vindo",
+      "previsao de chegada",
+      "deslocamento"
+    ],
+    "sintoma": "Usuário pergunta sobre o prazo de atendimento, previsão de visita técnica ou se o atendimento vai demorar",
+    "solucao_nivel_1": "O seu chamado já foi devidamente registrado no nosso sistema. A nossa equipe técnica de TI irá se deslocar até a sua unidade assim que possível, mediante a disponibilização de um veículo da frota da Secretaria de Saúde para o atendimento. O chamado segue monitorado em tempo real no nosso painel de controle.",
+    "requer_visita": false,
+    "criterio_visita": "Informativo institucional de SLA/deslocamento. Não gera novo chamado duplicado."
+  },
+  {
+    "id": "KB-CAD-UNIDADES-OFICIAIS",
+    "categoria": "Cadastro e Unidades Oficiais",
+    "equipamentos": [
+      "Rede Municipal de Saúde de Ipojuca"
+    ],
+    "tags": [
+      "unidades oficiais",
+      "lista de unidades",
+      "spa lagoa do carro",
+      "upa rio de janeiro",
+      "posto de saude",
+      "unidades validas",
+      "quais unidades",
+      "unidade nao existe"
+    ],
+    "sintoma": "Verificação de autenticidade de Unidade de Saúde de Ipojuca / Tentativa de informar unidade fictícia",
+    "solucao_nivel_1": "A Secretaria Municipal de Saúde de Ipojuca possui uma rede oficial fechada de 55 unidades de saúde (UPAs Ipojuca, Camela, Porto de Galinhas, Serrambi; Policlínicas Ipojuca, Camela, Porto de Galinhas, N. Sra do Ó; SPA Santo Cristo; Hospital Carozita Brito; Maternidade Mãe Lídia; Centros Especializados; e USFs 01 a 26). Nenhuma unidade fora desta lista é reconhecida.",
+    "requer_visita": false,
+    "criterio_visita": "Cadastros ou chamados só podem ser vinculados a unidades oficiais da lista homologada."
   }
 ]
